@@ -14,7 +14,7 @@ from datetime import timedelta
 import numpy as np
 
 # Get data
-client = bq.Client.from_service_account_json("/home/alexander/Documents/Apps/airflow/secrets/key.json")
+client = bq.Client.from_service_account_json(".../secrets/key.json")
 sql = """
 SELECT * FROM 17_data_mart_dev.17_sales_all_dev
 """
@@ -31,7 +31,7 @@ top_5_df.rename(columns={'Unnamed: 0':'Category'},inplace=True)
 top_5_df.drop('Unnamed: 1', axis=1, inplace=True)
 top_5_df = top_5_df.loc[:,~top_5_df.columns.duplicated()]
 
-client = bq.Client.from_service_account_json("/home/alexander/Documents/Apps/airflow/secrets/key.json")
+client = bq.Client.from_service_account_json("..../secrets/key.json")
 sql = """
 SELECT
 
@@ -59,11 +59,11 @@ DEST_DIR = os.path.join(ROOT, 'output')
 CSS = 'print-landscape.css'
 
 REPORT_TEMPLATE_DICT = {'Net_Sales_Units_LW':
- {'report_name':'_Top_5_Garments_by_Last_Week_Sales',
+ {'report_name':'_Top_5__by_Last_Week_Sales',
   'html_template':'layout_driver_sales.html',
   'df':'top_5_df_Net_Sales_Units_LW.csv'},
  'Cover':
-  {'report_name':'_Top_5_Garments_by_least_cover',
+  {'report_name':'_Top_5_by_least_cover',
   'html_template':'layout_driver_cover.html',
   'df':'top_5_df_Cover.csv'}
 }
@@ -81,7 +81,7 @@ def start():
         template = env.get_template(REPORT_TEMPLATE_DICT[key]['html_template'])
 
         css = os.path.join(CSS_SRC, CSS)
-        df_dir = '/home/alexander/Documents/Apps/airflow/Data/csv_reports'
+        df_dir = '/Data/csv_reports'
         df_date = date_str
         df_name = REPORT_TEMPLATE_DICT[key]['df']
 
