@@ -41,7 +41,7 @@ def dim_item(df):
 
     Item_urls = []
     for code in Item_codes:
-        URL = 'https://www.company.com/uk//tops/p/{}'.format(code)
+        URL = 'https://www.company.com/uk/p/{}'.format(code)
         Item_urls.append(URL)
 
     Image_urls = []
